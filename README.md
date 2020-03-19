@@ -486,4 +486,4 @@ The code for Predis is distributed under the terms of the MIT license (see [LICE
 
 [link-packagist]: https://packagist.org/packages/antibodies-online/predis
 [link-travis]: https://travis-ci.org/antibodies-online/predis
-[link-downloads]: https://packagist.org/antibodies-online/predis/predis/stats
+[link-downloads]: https://packagist.org/antibodies-online/predis/stats
