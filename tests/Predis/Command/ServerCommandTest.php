@@ -108,6 +108,16 @@ class ServerCommandTest extends PredisCommandTestCase
         // to __toString() so the string conversion is implicit, but assertSame
         // checks for strict equality while assertEquals is loose.
         $expected = array(array('get', 2, array('readonly', 'fast'), 1, 1, 1));
+
+        // NOTE: starting with Redis 6.0 and the introduction of Access Control
+        // Lists, COMMAND INFO returns an additional array for each specified
+        // command in yhe request with a list of the ACL categories associated
+        // to a command. We simply append this additional array in the expected
+        // response if the test suite is executed against Redis >= 6.0.
+        if ($this->isRedisServerVersion('>=', '6.0')) {
+            $expected[0][] = array('@read', '@string', '@fast');
+        }
+
         $this->assertCount(1, $response = $redis->command('INFO', 'GET'));
         $this->assertEquals($expected, $response);
     }
