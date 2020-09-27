@@ -254,7 +254,7 @@ class KeyPrefixProcessor implements ProcessorInterface
     public static function first(CommandInterface $command, $prefix)
     {
         if ($arguments = $command->getArguments()) {
-            if(\strpos($arguments[0], $prefix) !== FALSE) {
+            if(\strpos($arguments[0], $prefix) === FALSE) {
                 $arguments[0] = "$prefix{$arguments[0]}";
             }
             $command->setRawArguments($arguments);
@@ -271,7 +271,7 @@ class KeyPrefixProcessor implements ProcessorInterface
     {
         if ($arguments = $command->getArguments()) {
             foreach ($arguments as &$key) {
-                if(\strpos($key, $prefix) !== FALSE) {
+                if(\strpos($key, $prefix) === FALSE) {
                     $key = "$prefix$key";
                 }
             }
@@ -292,7 +292,7 @@ class KeyPrefixProcessor implements ProcessorInterface
             $length = count($arguments);
 
             for ($i = 0; $i < $length; $i += 2) {
-                if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                if(\strpos($arguments[$i], $prefix) === FALSE) {
                     $arguments[$i] = "$prefix{$arguments[$i]}";
                 }
             }
@@ -313,7 +313,7 @@ class KeyPrefixProcessor implements ProcessorInterface
             $length = count($arguments);
 
             for ($i = 1; $i < $length; ++$i) {
-                if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                if(\strpos($arguments[$i], $prefix) === FALSE) {
                     $arguments[$i] = "$prefix{$arguments[$i]}";
                 }
             }
@@ -334,7 +334,7 @@ class KeyPrefixProcessor implements ProcessorInterface
             $length = count($arguments);
 
             for ($i = 0; $i < $length - 1; ++$i) {
-                if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                if(\strpos($arguments[$i], $prefix) === FALSE) {
                     $arguments[$i] = "$prefix{$arguments[$i]}";
                 }
             }
@@ -352,13 +352,13 @@ class KeyPrefixProcessor implements ProcessorInterface
     public static function sort(CommandInterface $command, $prefix)
     {
         if ($arguments = $command->getArguments()) {
-            if(\strpos($arguments[0], $prefix) !== FALSE) {
+            if(\strpos($arguments[0], $prefix) === FALSE) {
                 $arguments[0] = "$prefix{$arguments[0]}";
             }
 
             if (($count = count($arguments)) > 1) {
                 for ($i = 1; $i < $count; ++$i) {
-                    if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                    if(\strpos($arguments[$i], $prefix) === FALSE) {
                         switch (strtoupper($arguments[$i])) {
                             case 'BY':
                             case 'STORE':
@@ -394,7 +394,7 @@ class KeyPrefixProcessor implements ProcessorInterface
     {
         if ($arguments = $command->getArguments()) {
             for ($i = 2; $i < $arguments[1] + 2; ++$i) {
-                if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                if(\strpos($arguments[$i], $prefix) === FALSE) {
                     $arguments[$i] = "$prefix{$arguments[$i]}";
                 }
             }
@@ -412,13 +412,13 @@ class KeyPrefixProcessor implements ProcessorInterface
     public static function zsetStore(CommandInterface $command, $prefix)
     {
         if ($arguments = $command->getArguments()) {
-            if(\strpos($arguments[0], $prefix) !== FALSE) {
+            if(\strpos($arguments[0], $prefix) === FALSE) {
                 $arguments[0] = "$prefix{$arguments[0]}";
             }
             $length = ((int) $arguments[1]) + 2;
 
             for ($i = 2; $i < $length; ++$i) {
-                if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                if(\strpos($arguments[$i], $prefix) === FALSE) {
                     $arguments[$i] = "$prefix{$arguments[$i]}";
                 }
             }
@@ -436,7 +436,7 @@ class KeyPrefixProcessor implements ProcessorInterface
     public static function migrate(CommandInterface $command, $prefix)
     {
         if ($arguments = $command->getArguments()) {
-            if(\strpos($arguments[2], $prefix) !== FALSE) {
+            if(\strpos($arguments[2], $prefix) === FALSE) {
                 $arguments[2] = "$prefix{$arguments[2]}";
                 $command->setRawArguments($arguments);
             }
@@ -457,7 +457,7 @@ class KeyPrefixProcessor implements ProcessorInterface
 
             if (($count = count($arguments)) > $startIndex) {
                 for ($i = $startIndex; $i < $count; ++$i) {
-                    if(\strpos($arguments[$i], $prefix) !== FALSE) {
+                    if(\strpos($arguments[$i], $prefix) === FALSE) {
                         switch (strtoupper($arguments[$i])) {
                             case 'STORE':
                             case 'STOREDIST':
